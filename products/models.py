@@ -40,7 +40,7 @@ class Order(models.Model):
         Overriden save method validates an order, calculates the cost and updates the stock quantity on the product.
         """
 
-        if not all([self.qty, self.product, self.user]) and self.qty <= 0:
+        if not self.qty or self.qty <= 0:
             raise InvalidOrderError
 
         elif self.product.stock_qty < self.qty:
